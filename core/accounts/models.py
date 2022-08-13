@@ -1,9 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from .userManager import UserManager
 
 
 # Create your models here.
-class User(AbstractBaseUser):
+class User(AbstractBaseUser, PermissionsMixin):
     """
     Custom User Model for our app.
     """
@@ -18,3 +19,7 @@ class User(AbstractBaseUser):
     image = models.ImageField(blank=True, null=True, upload_to='users/%Y/%m/%d/')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    USERNAME_FIELD = 'email'
+    # Set Manager
+    objects = UserManager()
