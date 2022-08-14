@@ -1,11 +1,13 @@
-from django.urls import path, include
-from django.contrib.auth.views import LoginView
-from .models import models
-from . import forms
+from django.urls import path
+from django.contrib.auth.views import LogoutView
 from . import views
 
+appname = 'account'
 urlpatterns = [
-    path('login/', LoginView.as_view(authentication_form=forms.UserLoginForm), name='login'),
-    path('dashboard/', views.index , name='dashboard'),
+    path('login/', views.LoginView.as_view(), name='login'),
+    path('dashboard/logout/', LogoutView.as_view(), name='logout'),
+
+
+    path('dashboard/', views.index, name='dashboard'),
     # path('', include('django.contrib.auth.urls'))
 ]

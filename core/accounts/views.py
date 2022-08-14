@@ -1,5 +1,6 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import HttpResponse
 from django.contrib.auth import views as auth_views
+
 from . import forms
 
 
