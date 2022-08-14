@@ -1,3 +1,12 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
+from django.contrib.auth import views as auth_views
+from . import forms
 
-# Create your views here.
+
+class LoginView(auth_views.LoginView):
+    form_class = forms.UserLoginForm
+    template_name = 'registration/login.html'
+
+
+def index(request):
+    return HttpResponse(request.user)
