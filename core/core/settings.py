@@ -56,7 +56,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'core/templates'],
+        'DIRS': [BASE_DIR / 'core/templates', BASE_DIR / 'accounts/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -134,3 +134,8 @@ LOGIN_REDIRECT_URL = "/dashboard"  # Route defined in app/urls.py
 LOGOUT_REDIRECT_URL = "/login"  # Route defined in app/urls.py
 
 # PREPEND_WWW = False
+
+
+# Email Test.
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # Just in Develop Mode.
