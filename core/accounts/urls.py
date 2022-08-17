@@ -15,4 +15,7 @@ urlpatterns = [
 
     # For Dashboard
     path('dashboard/users/', views.UsersViewList.as_view(), name="users"),
+
+    path('dashboard/permissions/', views.PermissionsViewList.as_view(), name="permissions"),
+    path('dashboard/groups/', views.GroupsViewList.as_view(), name="groups"),
 ]

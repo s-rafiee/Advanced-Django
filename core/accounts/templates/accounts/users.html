@@ -1,1 +1,73 @@
 {% extends 'layouts/dashboard.base.html' %}
+{% block content %}
+    {#    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">لیست کاربران /</span>کاربران</h4>#}
+{#    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> کاربران / </span>لیست کاربران</h4>#}
+    <div class="card px-4">
+        <h5 class="card-header">لیست کاربران</h5>
+        <div class="table-responsive text-nowrap pb-4">
+            <table class="table table-bordered text-center">
+                {% include 'pagination.html' %}
+                <thead>
+                <tr>
+                    <th>#id</th>
+                    <th>نام و نام خانوادگی</th>
+                    <th>ایمیل</th>
+                    <th>پروفایل</th>
+                    <th>دسترسی</th>
+                    <th>وضعیت</th>
+                    <th>آخرین بازدید</th>
+                    <th>ویرایش</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for obj in object_list %}
+                    <tr>
+                        <td>{{ obj.id }}</td>
+                        <td>{% if obj.first_name %}{{ obj.first_name }}{% endif %} {% if obj.last_name %}{{ obj.last_name }}{% endif %}</td>
+                        <td>{{ obj.email }}</td>
+                        <td>
+                            {% if obj.image %}
+                                <img src="{{ obj.image }}" alt="No Avatar" class="rounded-circle w-25">
+                            {% else %}
+                                <img src="/static/assets/img/avatars/5.png" alt="No Avatar" class="rounded-circle w-25">
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if obj.is_superuser %}
+                                <span class="badge bg-danger me-1">مدیر کل</span>
+                            {% elif obj.is_staff %}
+                                <span class="badge bg-black me-1">کارمند</span>
+                            {% else %}
+                                <span class="badge bg-success me-1">کاربر</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if obj.is_active %}
+                                <span class="badge bg-success me-1">فعال</span>
+                            {% else %}
+                                <span class="badge bg-danger me-1">غیر فعال</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if obj.last_login %}
+                                {{ obj.jlast_login }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}
