@@ -1,17 +1,24 @@
 from django.db import models
 from accounts.models import User
+import jdatetime
 
 
 # Create your models here.
 class Category(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, null=True, unique=True)
-    parent = models.ForeignKey(to='self', null=True, default=None, on_delete=models.SET_NULL)
+    parent = models.ForeignKey(to='self', null=True, blank=True, on_delete=models.SET_NULL)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
+
+    def jcreated_at(self):
+        return jdatetime.datetime.fromgregorian(datetime=self.created_at).strftime('%Y-%m-%d %H:%M:%S')
+
+    def jupdated_at(self):
+        return jdatetime.datetime.fromgregorian(datetime=self.updated_at).strftime('%Y-%m-%d %H:%M:%S')
 
 
 class Tag(models.Model):
@@ -22,6 +29,12 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.title
+
+    def jcreated_at(self):
+        return jdatetime.datetime.fromgregorian(datetime=self.created_at).strftime('%Y-%m-%d %H:%M:%S')
+
+    def jupdated_at(self):
+        return jdatetime.datetime.fromgregorian(datetime=self.updated_at).strftime('%Y-%m-%d %H:%M:%S')
 
 
 class Post(models.Model):
@@ -39,12 +52,18 @@ class Post(models.Model):
     visit = models.IntegerField(default=0)
     user = models.ForeignKey(to=User, related_name='posts', null=True, on_delete=models.SET_NULL)
     tag = models.ManyToManyField(to=Tag, related_name='posts', default=None)
-    category = models.ManyToManyField(to=Category, related_name='posts', default=None)
+    category = models.ManyToManyField(to=Category, related_name='posts', default=None, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
+
+    def jcreated_at(self):
+        return jdatetime.datetime.fromgregorian(datetime=self.created_at).strftime('%Y-%m-%d %H:%M:%S')
+
+    def jupdated_at(self):
+        return jdatetime.datetime.fromgregorian(datetime=self.updated_at).strftime('%Y-%m-%d %H:%M:%S')
 
 
 class Comment(models.Model):
@@ -58,3 +77,9 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.message
+
+    def jcreated_at(self):
+        return jdatetime.datetime.fromgregorian(datetime=self.created_at).strftime('%Y-%m-%d %H:%M:%S')
+
+    def jupdated_at(self):
+        return jdatetime.datetime.fromgregorian(datetime=self.updated_at).strftime('%Y-%m-%d %H:%M:%S')
