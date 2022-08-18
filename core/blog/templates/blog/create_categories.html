@@ -1,0 +1,34 @@
+{% extends 'layouts/dashboard.base.html' %}
+
+{% block content %}
+    <div class="card px-4">
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> وبلاگ / </span>ایجاد دسته بندی جدید</h4>
+        <form method="post">
+            {% csrf_token %}
+            <div class="row pb-5">
+                <div class="col-md-6 pt-4">
+                    <label class="form-label" for="id-title">عنوان</label>
+                    {{ form.title }}
+                </div>
+                <div class="col-md-6 pt-4">
+                    <label class="form-label" for="id-slug">Slug</label>
+                    {{ form.slug }}
+                </div>
+                <div class="col-md-6 pt-4">
+                    <label class="form-label" for="id-parent">دسته مادر (در صورت عدم وجود خالی بگذارید)</label>
+                    {{ form.parent }}
+                </div>
+                <div class="col-md-6 pt-4">
+                    <button class="btn btn-success mt-4" type="submit">ایجاد</button>
+
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            {{ form.errors }}
+                        </div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
