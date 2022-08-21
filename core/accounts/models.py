@@ -19,7 +19,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_verified = models.BooleanField(default=False)
     image = models.ImageField(blank=True, null=True, upload_to='users/%Y/%m/%d/')
-    last_login = models.DateTimeField()
+    last_login = models.DateTimeField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

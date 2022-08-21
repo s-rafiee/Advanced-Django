@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from django.contrib.auth.views import LogoutView
 from . import views
 
@@ -18,4 +18,7 @@ urlpatterns = [
 
     path('dashboard/permissions/', views.PermissionsViewList.as_view(), name="permissions"),
     path('dashboard/groups/', views.GroupsViewList.as_view(), name="groups"),
+
+    # API URLs
+    path('api/v1/', include('accounts.api.v1.urls'))
 ]
