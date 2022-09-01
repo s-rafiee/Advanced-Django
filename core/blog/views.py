@@ -9,20 +9,20 @@ from django.urls import reverse
 
 # Create your views here.
 class CategoryView(ListView):
-    template_name = 'blog/categories.html'
+    template_name = "blog/categories.html"
     model = models.Category
     paginate_by = 15
-    ordering = ['-id']
+    ordering = ["-id"]
 
 
 class CreateCategoryFormView(CreateView):
     models = models.Category
     form_class = forms.CategoryForm
-    template_name = 'blog/create_categories.html'
-    success_url = '/dashboard/categories/'
+    template_name = "blog/create_categories.html"
+    success_url = "/dashboard/categories/"
 
 
 def test(request):
-    cat = models.Category(title='t1', slug='s1')
+    cat = models.Category(title="t1", slug="s1")
     cat.save()
-    return HttpResponse('ss')
+    return HttpResponse("ss")
