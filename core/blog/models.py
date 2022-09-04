@@ -54,7 +54,7 @@ class Post(models.Model):
 
     user = models.ForeignKey(to=User, related_name='posts', null=True, on_delete=models.SET_NULL)
     tag = models.ManyToManyField(to=Tag, related_name='posts', default=None)
-    category = models.ManyToManyField(to=Category, related_name='posts', default=None, null=True)
+    category = models.ManyToManyField(to=Category, related_name='posts', default=None, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
