@@ -7,13 +7,7 @@ import jdatetime
 class Category(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, null=True, unique=True)
-<<<<<<< HEAD
-    parent = models.ForeignKey(
-        to="self", null=True, blank=True, on_delete=models.SET_NULL
-    )
-=======
     parent = models.ForeignKey(to='self', null=True, blank=True, on_delete=models.SET_NULL)
->>>>>>> d78be232b16d1b2a980ac2491ed17361dd7eb205
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -21,21 +15,10 @@ class Category(models.Model):
         return self.title
 
     def jcreated_at(self):
-<<<<<<< HEAD
-        return jdatetime.datetime.fromgregorian(
-            datetime=self.created_at
-        ).strftime("%Y-%m-%d %H:%M:%S")
-
-    def jupdated_at(self):
-        return jdatetime.datetime.fromgregorian(
-            datetime=self.updated_at
-        ).strftime("%Y-%m-%d %H:%M:%S")
-=======
         return jdatetime.datetime.fromgregorian(datetime=self.created_at).strftime('%Y-%m-%d %H:%M:%S')
 
     def jupdated_at(self):
         return jdatetime.datetime.fromgregorian(datetime=self.updated_at).strftime('%Y-%m-%d %H:%M:%S')
->>>>>>> d78be232b16d1b2a980ac2491ed17361dd7eb205
 
 
 class Tag(models.Model):
@@ -48,21 +31,10 @@ class Tag(models.Model):
         return self.title
 
     def jcreated_at(self):
-<<<<<<< HEAD
-        return jdatetime.datetime.fromgregorian(
-            datetime=self.created_at
-        ).strftime("%Y-%m-%d %H:%M:%S")
-
-    def jupdated_at(self):
-        return jdatetime.datetime.fromgregorian(
-            datetime=self.updated_at
-        ).strftime("%Y-%m-%d %H:%M:%S")
-=======
         return jdatetime.datetime.fromgregorian(datetime=self.created_at).strftime('%Y-%m-%d %H:%M:%S')
 
     def jupdated_at(self):
         return jdatetime.datetime.fromgregorian(datetime=self.updated_at).strftime('%Y-%m-%d %H:%M:%S')
->>>>>>> d78be232b16d1b2a980ac2491ed17361dd7eb205
 
 
 class Post(models.Model):
@@ -70,7 +42,6 @@ class Post(models.Model):
         ("draft", "Draft"),
         ("published", "Published"),
     ]
-
     title = models.CharField(max_length=255)
     slug = models.SlugField(max_length=255, null=True, unique=True)
     description = models.CharField(max_length=255)
@@ -80,19 +51,10 @@ class Post(models.Model):
         max_length=20, choices=STATUS_CHOICES, default="draft"
     )
     visit = models.IntegerField(default=0)
-<<<<<<< HEAD
-    user = models.ForeignKey(
-        to=User, related_name="posts", null=True, on_delete=models.SET_NULL
-    )
-    tag = models.ManyToManyField(to=Tag, related_name="posts", default=None)
-    category = models.ManyToManyField(
-        to=Category, related_name="posts", default=None, null=True
-    )
-=======
+
     user = models.ForeignKey(to=User, related_name='posts', null=True, on_delete=models.SET_NULL)
     tag = models.ManyToManyField(to=Tag, related_name='posts', default=None)
     category = models.ManyToManyField(to=Category, related_name='posts', default=None, null=True)
->>>>>>> d78be232b16d1b2a980ac2491ed17361dd7eb205
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -100,21 +62,10 @@ class Post(models.Model):
         return self.title
 
     def jcreated_at(self):
-<<<<<<< HEAD
-        return jdatetime.datetime.fromgregorian(
-            datetime=self.created_at
-        ).strftime("%Y-%m-%d %H:%M:%S")
-
-    def jupdated_at(self):
-        return jdatetime.datetime.fromgregorian(
-            datetime=self.updated_at
-        ).strftime("%Y-%m-%d %H:%M:%S")
-=======
         return jdatetime.datetime.fromgregorian(datetime=self.created_at).strftime('%Y-%m-%d %H:%M:%S')
 
     def jupdated_at(self):
         return jdatetime.datetime.fromgregorian(datetime=self.updated_at).strftime('%Y-%m-%d %H:%M:%S')
->>>>>>> d78be232b16d1b2a980ac2491ed17361dd7eb205
 
 
 class Comment(models.Model):
@@ -136,18 +87,7 @@ class Comment(models.Model):
         return self.message
 
     def jcreated_at(self):
-<<<<<<< HEAD
-        return jdatetime.datetime.fromgregorian(
-            datetime=self.created_at
-        ).strftime("%Y-%m-%d %H:%M:%S")
-
-    def jupdated_at(self):
-        return jdatetime.datetime.fromgregorian(
-            datetime=self.updated_at
-        ).strftime("%Y-%m-%d %H:%M:%S")
-=======
         return jdatetime.datetime.fromgregorian(datetime=self.created_at).strftime('%Y-%m-%d %H:%M:%S')
 
     def jupdated_at(self):
         return jdatetime.datetime.fromgregorian(datetime=self.updated_at).strftime('%Y-%m-%d %H:%M:%S')
->>>>>>> d78be232b16d1b2a980ac2491ed17361dd7eb205
