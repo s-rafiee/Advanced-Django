@@ -35,6 +35,4 @@ urlpatterns = [
         name="permissions",
     ),
     path("dashboard/groups/", views.GroupsViewList.as_view(), name="groups"),
-    # API URLs
-    path("api/v1/", include("accounts.api.v1.urls")),
 ]

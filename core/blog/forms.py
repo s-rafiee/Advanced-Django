@@ -24,7 +24,6 @@ class CategoryForm(forms.ModelForm):
 
     def clean(self):
         super(CategoryForm, self).clean()
-        print(self.cleaned_data["parent"])
         try:
             self.cleaned_data["parent"] = models.Category.objects.get(
                 pk=self.cleaned_data["parent"].id

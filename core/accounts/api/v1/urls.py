@@ -1,7 +1,6 @@
 from django.urls import path
 from . import views
 from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
     TokenRefreshView,
     TokenVerifyView,
 )
@@ -10,43 +9,18 @@ from rest_framework_simplejwt.views import (
 
 urlpatterns = [
     path(
-        "accounts/register/",
-        views.RegistrationAPIView.as_view(),
-        name="api_registration",
+        "register/", views.RegistrationAPIView.as_view(), name="api_registration",
     ),
     path(
-        "accounts/login/",
-        views.LoginTokenView.as_view(),
-        name="api_token_login",
-    ),  # Login with token
-    path(
-        "accounts/logout/",
-        views.LogoutTokenView.as_view(),
-        name="api_token_logout",
-    ),  # Login with token
-    # JWT =>
-    path(
-        "accounts/jwt/create/",
-        TokenObtainPairView.as_view(),
-        name="jwt_create",
+        "login/", views.LoginView.as_view(), name="login",
     ),
     path(
-        "accounts/jwt/refresh/",
-        TokenRefreshView.as_view(),
-        name="jwt_refresh",
+        "profile/", views.MpProfileView.as_view(), name="my_profile",
     ),
     path(
-        "accounts/jwt/verify/", TokenVerifyView.as_view(), name="jwt_verify"
-    ),
-    # Custom JWT
-    path(
-        "accounts/jwt2/create/",
-        views.CreateJWTTokenView.as_view(),
-        name="jwt2_create",
+        "token/verify/", TokenVerifyView.as_view(), name="token_verify"
     ),
     path(
-        "accounts/jwt/profile/",
-        views.ProfileJWTView.as_view(),
-        name="jwt_profile",
-    ),
+        "token/refresh/", TokenRefreshView.as_view(), name="token_refresh"
+    )
 ]

@@ -8,6 +8,9 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
 class RegistrationSerializer(serializers.ModelSerializer):
+    """
+    Validate Email and Password and Password1 and Create New User.
+    """
     password1 = serializers.CharField(max_length=255, write_only=True)
 
     class Meta:
@@ -17,7 +20,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         if attrs.get("password") != attrs.get("password1"):
             raise serializers.ValidationError(
-                {"detail": "password doesn't match."}
+                {"detail": "رمز عبور و تکرار آن یکسان نیستند."}
             )
         try:
             validate_password(attrs.get("password"))
@@ -36,7 +39,7 @@ class LoginSerializer(serializers.Serializer):
      so we customize this and changed to (email and password).
     """
 
-    username = serializers.CharField(label=_("Email"), write_only=True)
+    email = serializers.CharField(label=_("Email"), write_only=True)
     password = serializers.CharField(
         label=_("Password"),
         style={"input_type": "password"},
@@ -46,13 +49,13 @@ class LoginSerializer(serializers.Serializer):
     token = serializers.CharField(label=_("Token"), read_only=True)
 
     def validate(self, attrs):
-        username = attrs.get("email")
+        email = attrs.get("email")
         password = attrs.get("password")
 
-        if username and password:
+        if email and password:
             user = authenticate(
                 request=self.context.get("request"),
-                username=username,
+                email=email,
                 password=password,
             )
 
@@ -70,28 +73,27 @@ class LoginSerializer(serializers.Serializer):
         return attrs
 
 
-class JWTCreateTokenSerializer(TokenObtainPairSerializer):
+class JWTLoginSerializer(TokenObtainPairSerializer):
+
     def validate(self, attrs):
         validated_data = super().validate(attrs)
-        validated_data["user"] = {
-            "id": self.user.id,
-            "email": self.user.email,
-        }
-        print(validated_data)
+        validated_data["uid"] = self.user.id
         return validated_data
 
 
-class ProfileSerializer(serializers.ModelSerializer):
+class MyProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.User
         fields = [
-            "id",
+            'id',
+            "email",
             "first_name",
             "last_name",
-            "email",
-            "last_login",
+            "image",
+            "is_active",
+            "is_verified",
             "is_superuser",
             "is_staff",
-            "is_active",
-            "image",
+            "last_login",
+            "created_at",
         ]
